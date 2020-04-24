@@ -1,0 +1,45 @@
+struct ListNode *mergelists(struct ListNode *list1, struct ListNode *list2)
+{
+	int a[100],i,k=0,t,j;
+	struct ListNode *p=list1;
+	while(p)
+	{
+		a[k++]=p->data;
+		p=p->next;
+	}
+	p=list2;
+	while(p)
+	{
+		a[k++]=p->data;
+		p=p->next;
+	}
+	for(i=0;i<k-1;i++)
+	{
+		for(j=i+1;j<k;j++)
+		{
+			if(a[i]>a[j])
+			{
+				t=a[i];
+				a[i]=a[j];
+				a[j]=t;
+			}
+		}
+	}
+	struct ListNode *head,*tail,*q=NULL;
+	head=tail=NULL;
+	for(i=0;i<k;i++)
+	{
+		q=(struct ListNode *)malloc(sizeof(struct ListNode));
+		q->data=a[i];
+		if(head==NULL)
+		{
+			head=q;
+		}
+		else
+		{
+			tail->next=q;
+		}
+		tail=q;
+	}
+	return head;
+ } 
